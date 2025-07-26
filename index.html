@@ -20,9 +20,9 @@
     
     <style>
         * { font-family: 'Inter', sans-serif; }
-        .custom-brand { font-family: P22Mackinac;}
+        .custom-brand { font-family: P22Mackinac; }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(135deg, #5771e4 0%, #5b2c8a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
         .fade-in { animation: fadeIn 0.8s ease-in; }
         .slide-up { animation: slideUp 0.8s ease-out; }
@@ -40,7 +40,7 @@
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <!-- Custom Brand -->
         <div class="text-center p-4 bg-gradient-to-r from-violet-100 to-violet-200 text-violet-900 text-2xl border-b-2 border-violet-200">
-            <span class="custom-brand bg-gradient-to-r from-violet-700 to-violet-900 bg-clip-text text-transparent">SloaneCarson.com</span>
+            <a href="#top"><span class="custom-brand bg-gradient-to-r from-violet-800 to-violet-950 bg-clip-text text-transparent">SloaneCarson.com</span></a>
         </div>
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -634,11 +634,30 @@
                     <p class="mb-2">* These statements have not been evaluated by the Food and Drug Administration.</p>
                     <p class="mb-2">This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
                     <p>&copy; 2024 PrimeBiome Landing Page. All rights reserved.</p>
+                    <p class="my-10"><a href="privacy.html">Privacy Policy</a></p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <div id="cookieModal" class="modal">
+        <div class="modal-content">
+            <p>We use cookies to improve your experience. By continuing to browse, you agree to our <a href="privacy.html">Cookie Policy</a>.</p>
+            <button onclick="aceitarCookies()">Accept</button>
+        </div>
+    </div>
+    <!-- javascript for cookies -->
+    <script>
+        function aceitarCookies() {
+            document.getElementById("cookieModal").style.display = "none";
+            localStorage.setItem("cookiesAceitos", "true");
+        }
+        window.onload = function() {
+            if (!localStorage.getItem("cookiesAceitos")) {
+                document.getElementById("cookieModal").style.display = "block";
+            }
+        };
+    </script>
     <!-- JavaScript for smooth scrolling and animations -->
     <script src="js/main.js"></script>
 </body>

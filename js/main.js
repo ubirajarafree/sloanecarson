@@ -347,11 +347,19 @@ window.addEventListener('load', () => {
 
 // Adjust header padding on scroll
 window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
   const branding = document.getElementById('branding');
+
   if (window.scrollY > 50) {
+    header.classList.remove('shadow-xl');
+    header.classList.add('shadow-lg');
+
     branding.classList.remove('py-4');
     branding.classList.add('py-2');
   } else {
+    header.classList.remove('shadow-lg');
+    header.classList.add('shadow-xl');
+
     branding.classList.remove('py-2');
     branding.classList.add('py-4');
   }

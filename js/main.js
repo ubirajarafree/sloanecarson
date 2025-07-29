@@ -344,3 +344,15 @@ document.addEventListener('keydown', function(e) {
 window.addEventListener('load', () => {
     initFloatingAnimation();
 });
+
+// Adjust header padding on scroll
+window.addEventListener('scroll', () => {
+  const branding = document.getElementById('branding');
+  if (window.scrollY > 50) {
+    branding.classList.remove('py-4');
+    branding.classList.add('py-2');
+  } else {
+    branding.classList.remove('py-2');
+    branding.classList.add('py-4');
+  }
+});

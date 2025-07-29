@@ -658,30 +658,59 @@
         </div>
     </footer>
 
+    <!-- Cookie Consent Modal -->
     <div id="cookieModal" class="modal">
-        <div class="modal-content" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-            <p>We use cookies to improve your experience. By continuing to browse, you agree to our <a href="privacy.html">Cookie Policy</a>.</p>
-            <div style="display: flex; gap: 0.75rem;">
-                <button onclick="learnMoreCookies()" style="background: transparent; border: 1px solid #6366f1; color: #6366f1; padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 500; cursor: pointer; transition: background 0.2s;">Learn More</button>
-                <button onclick="acceptCookies()" style="background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: white; padding: 0.5rem 1.25rem; border: none; border-radius: 9999px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15); transition: background 0.2s;">Accept</button>
+        <div class="modal-content">
+            <p>
+                We use cookies to improve your experience. By continuing to browse, you agree to our
+                <a href="privacy.html">Cookie Policy</a>.
+            </p>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="learnMoreCookies()">Learn More</button>
+                <button class="btn-gradient" onclick="acceptCookies()">Accept</button>
             </div>
         </div>
     </div>
-    <!-- javascript for cookies -->
+
+    <!-- Cookie Consent JavaScript -->
     <script>
         function acceptCookies() {
-            document.getElementById("cookieModal").style.display = "none";
+            closeModal();
             localStorage.setItem("cookiesAccepted", "true");
         }
+
         function learnMoreCookies() {
             window.location.href = "privacy.html";
         }
-        window.onload = function() {
+
+        function closeModal() {
+            document.getElementById("cookieModal").style.display = "none";
+        }
+
+        window.onload = function () {
+            const modal = document.getElementById("cookieModal");
+            const content = modal.querySelector(".modal-content");
+
             if (!localStorage.getItem("cookiesAccepted")) {
-                document.getElementById("cookieModal").style.display = "block";
+                modal.style.display = "block";
+
+                // ESC key to close
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") {
+                        closeModal();
+                    }
+                });
+
+                // Click outside modal-content to close
+                modal.addEventListener("click", function (e) {
+                    if (!content.contains(e.target)) {
+                        closeModal();
+                    }
+                });
             }
         };
     </script>
+
     <!-- JavaScript for smooth scrolling and animations -->
     <script src="js/main.js"></script>
 </body>

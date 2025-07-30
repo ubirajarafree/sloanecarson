@@ -168,13 +168,13 @@ function initFAQAccordion() {
 
 // Click tracking for affiliate links
 function initClickTracking() {
-    const ctaButtons = document.querySelectorAll('a[href*="getprimebiome.com"]');
+    const ctaButtons = document.querySelectorAll('a[href*="clickbank"]');
     
     ctaButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             // Track the click event
             const buttonText = this.textContent.trim();
-            console.log('CTA clicked:', buttonText);
+            //console.log('CTA clicked:', buttonText);
             
             // Add visual feedback
             this.style.transform = 'scale(0.98)';
@@ -189,7 +189,8 @@ function initClickTracking() {
         // Add loading state on click
         button.addEventListener('click', function() {
             const originalText = this.innerHTML;
-            this.innerHTML = '<span class="loading"></span> Redirecting...';
+            //this.innerHTML = '<span class="loading"></span> Redirecting...';
+            this.innerHTML = 'Redirecting...';
             
             setTimeout(() => {
                 this.innerHTML = originalText;

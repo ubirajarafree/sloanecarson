@@ -12,7 +12,53 @@ html {
     scroll-behavior: smooth;
 }
 
+
+/* Utility background and text gradients */
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #5771e4 0%, #5b2c8a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Utility glass effect */
+.glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Pulse glow animation utility */
+.pulse-glow {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+    }
+}
+
 /* Custom animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -74,6 +120,20 @@ html {
 }
 
 /* Animation classes */
+img:not(.fade-in) {
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+img.fade-in {
+  opacity: 1;
+  transition: opacity 0.6s;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
 .animate-fadeInUp {
     animation: fadeInUp 0.8s ease-out;
 }
@@ -104,11 +164,22 @@ html {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Utility hover scale effect */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+
 /* Gradient text effect */
 .gradient-text-animated {
     background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
     background-size: 400% 400%;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientShift 4s ease infinite;
 }
@@ -280,14 +351,15 @@ html {
 
 /* Scroll-triggered animations */
 .scroll-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
 }
 
 .scroll-animate.animate {
-    opacity: 1;
-    transform: translateY(0);
+  /* animation: fadeInUp 0.6s ease forwards; */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Enhanced focus states for accessibility */

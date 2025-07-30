@@ -66,6 +66,23 @@ function initScrollAnimations() {
     });
 }
 
+// Lazy loading for images
+function initLazyLoading() {
+    const images = document.querySelectorAll('img[src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.add('fade-in');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
 // Dynamic pricing calculator
 function initPricingCalculator() {
     const packages = {
@@ -110,7 +127,7 @@ function initPricingCalculator() {
 
 // FAQ Accordion functionality
 function initFAQAccordion() {
-    const faqItems = document.querySelectorAll('.bg-white.p-6');
+    const faqItems = document.querySelectorAll('.faq-item');
     
     faqItems.forEach(item => {
         const question = item.querySelector('h3');
@@ -120,7 +137,7 @@ function initFAQAccordion() {
             // Initially hide answers
             answer.style.maxHeight = '0';
             answer.style.overflow = 'hidden';
-            answer.style.transition = 'max-height 0.3s ease';
+            answer.style.transition = 'max-height 0.5s ease';
             
             // Add click handler
             question.style.cursor = 'pointer';
@@ -138,6 +155,7 @@ function initFAQAccordion() {
             item.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-2px)';
                 this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                this.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             });
             
             item.addEventListener('mouseleave', function() {
@@ -178,23 +196,6 @@ function initClickTracking() {
             }, 2000);
         });
     });
-}
-
-// Lazy loading for images
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.classList.add('fade-in');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
 }
 
 // Typing effect for hero text

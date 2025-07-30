@@ -351,12 +351,13 @@ html {
   align-items: center;
 }
 
-/* Ativa o modal quando display: block */
+
+/* Activate modal when display: block */
 .modal[style*="display: block"] {
   display: flex !important;
 }
 
-/* Conteúdo da janela modal */
+/* Modal window content */
 .modal-content {
   background: #fff;
   border-radius: 1.5rem;
@@ -368,7 +369,7 @@ html {
   animation: fadeInModal 0.3s ease-out;
 }
 
-/* Texto e link */
+/* Modal text and link */
 .modal-content p {
   color: #334155;
   font-size: 1.1rem;
@@ -381,7 +382,7 @@ html {
   font-weight: 500;
 }
 
-/* Botões */
+/* Modal buttons */
 .modal-actions {
   display: flex;
   gap: 0.75rem;
@@ -419,7 +420,7 @@ html {
   background: linear-gradient(90deg, #2563eb 0%, #22c55e 100%);
 }
 
-/* Animação de entrada */
+/* Modal entrance animation */
 @keyframes fadeInModal {
   from {
     opacity: 0;

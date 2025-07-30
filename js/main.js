@@ -220,7 +220,7 @@ function initTypingEffect() {
 
 // Add floating animation to product images
 function initFloatingAnimation() {
-    const productImages = document.querySelectorAll('img[src*="probiotic"]');
+    const productImages = document.querySelectorAll('img[src*="primebiome"]');
     productImages.forEach(img => {
         img.classList.add('animate-float');
     });

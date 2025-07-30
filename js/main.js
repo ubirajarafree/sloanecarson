@@ -346,20 +346,28 @@ window.addEventListener('load', () => {
 });
 
 // Adjust header on scroll
-let isScrolled = false;
+let ticking = false;
 
 window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      handleScroll();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+function handleScroll() {
   const header = document.getElementById('header');
   const branding = document.getElementById('branding');
   const scrolled = window.scrollY > 50;
 
-  if (scrolled !== isScrolled) {
-    isScrolled = scrolled;
-
+  setTimeout(() => {
     header.classList.toggle('shadow-xl', !scrolled);
     header.classList.toggle('shadow-lg', scrolled);
 
     branding.classList.toggle('py-4', !scrolled);
     branding.classList.toggle('py-2', scrolled);
-  }
-});
+  }, 100);
+}

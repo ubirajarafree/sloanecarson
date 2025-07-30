@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFAQAccordion();
     initClickTracking();
     initLazyLoading();
-    initTypingEffect();
+    //initTypingEffect();
 });
 
 // Smooth scrolling for internal links
@@ -211,12 +211,12 @@ function initTypingEffect() {
             if (i < text.length) {
                 heroTitle.textContent += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, 50);
+                setTimeout(typeWriter, 20);
             }
         };
         
         // Start typing effect after a short delay
-        setTimeout(typeWriter, 500);
+        setTimeout(typeWriter, 200);
     }
 }
 

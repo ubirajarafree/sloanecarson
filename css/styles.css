@@ -25,6 +25,13 @@ html {
     -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-green-to-blue {
+    background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* Utility glass effect */
 .glass-effect {
     backdrop-filter: blur(10px);
@@ -317,8 +324,8 @@ img.fade-in {
 /* Loading animation */
 .loading {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     border-top-color: #fff;

@@ -667,8 +667,9 @@
                 <a class="text-blue-600 underline hover:text-blue-500 transition-colors duration-200" href="privacy.html">Cookie Policy</a>.
             </p>
             <div class="modal-actions">
-                <button class="btn-outline" onclick="learnMoreCookies()">Learn More</button>
-                <button class="btn-gradient" onclick="acceptCookies()">Accept</button>
+                <button class="btn-outline" onclick="learnMoreCookies()">More</button>
+                <button class="btn-gradient mx-auto block" style="min-width:100px;" onclick="acceptCookies()">Accept</button>
+                <button class="btn-outline" onclick="noCookies()">No</button>
             </div>
         </div>
     </div>
@@ -682,6 +683,10 @@
 
         function learnMoreCookies() {
             window.location.href = "privacy.html";
+        }
+
+        function noCookies() {
+            // Função vazia
         }
 
         function closeModal() {

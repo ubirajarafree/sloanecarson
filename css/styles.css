@@ -419,94 +419,96 @@ img.fade-in {
 
 /* Modal container */
 .modal {
-  display: none; /* será ativado via JS */
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(30, 41, 59, 0.7); /* fundo escurecido */
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 41, 59, 0.7);
+    justify-content: center;
+    align-items: center;
 }
-
 
 /* Activate modal when display: block */
 .modal[style*="display: block"] {
-  display: flex !important;
+    display: flex !important;
 }
 
 /* Modal window content */
 .modal-content {
-  background: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-  padding: 2rem 2.5rem;
-  max-width: 90vw;
-  width: 400px;
-  text-align: center;
-  animation: fadeInModal 0.3s ease-out;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    padding: 2rem 2.5rem;
+    max-width: 90vw;
+    width: 400px;
+    text-align: center;
+    animation: fadeInModal 0.3s ease-out;
 }
 
 /* Modal text and link */
 .modal-content p {
-  color: #334155;
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+    color: #334155;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
 }
 
 .modal-content a {
-  color: #6366f1;
-  text-decoration: underline;
-  font-weight: 500;
+    color: #6366f1;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
 /* Modal buttons */
 .modal-actions {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
+    display: inline-flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    width: auto;
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid #6366f1;
-  color: #6366f1;
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
+    background: transparent;
+    border: 1px solid #6366f1;
+    color: #6366f1;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .btn-outline:hover {
-  background: rgba(99, 102, 241, 0.1);
+    background: rgba(99, 102, 241, 0.1);
 }
 
 .btn-gradient {
-  background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%);
-  color: white;
-  padding: 0.5rem 1.25rem;
-  border: none;
-  border-radius: 9999px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-  transition: background 0.2s;
+    background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    transition: background 0.2s;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(90deg, #2563eb 0%, #22c55e 100%);
+    background: linear-gradient(90deg, #2563eb 0%, #22c55e 100%);
 }
 
 /* Modal entrance animation */
 @keyframes fadeInModal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

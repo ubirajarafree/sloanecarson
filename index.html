@@ -659,7 +659,7 @@
     </footer>
 
     <!-- Cookie Consent Modal -->
-    <div id="cookieModal" class="modal">
+<div id="cookieModal" class="modal hidden">
         <div class="modal-content">
             <p>
                 We use cookies to improve your experience. By continuing to browse, you agree to our
@@ -690,7 +690,9 @@
         }
 
         function closeModal() {
-            document.getElementById("cookieModal").style.display = "none";
+            const modal = document.getElementById("cookieModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
         }
 
         window.onload = function () {
@@ -698,7 +700,8 @@
             const content = modal.querySelector(".modal-content");
 
             if (!localStorage.getItem("cookiesAccepted")) {
-                modal.style.display = "block";
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
 
                 // ESC key to close
                 document.addEventListener("keydown", function (e) {

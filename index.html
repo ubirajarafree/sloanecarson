@@ -659,7 +659,7 @@
     </footer>
 
     <!-- Cookie Consent Modal -->
-<div id="cookieModal" class="modal hidden">
+    <div id="cookieModal" class="modal hidden">
         <div class="modal-content">
             <p>
                 We use cookies to improve your experience. By continuing to browse, you agree to our
@@ -670,6 +670,20 @@
                 <button class="btn-outline" onclick="learnMoreCookies()">More</button>
                 <button class="btn-gradient mx-auto block" style="min-width:100px;" onclick="acceptCookies()">Accept</button>
                 <button class="btn-outline" onclick="noCookies()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redirect Confirmation Modal -->
+    <div id="redirectModal" class="modal hidden">
+        <div class="modal-content">
+            <p>
+                You’re about to visit the official site.  
+                This link may lead to external content or affiliate offers.
+            </p>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="cancelRedirect()">Cancel</button>
+                <button class="btn-gradient mx-auto block" style="min-width:100px;" onclick="confirmRedirect()">Continue</button>
             </div>
         </div>
     </div>

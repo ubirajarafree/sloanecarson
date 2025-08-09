@@ -167,36 +167,62 @@ function initFAQAccordion() {
 }
 
 // Click tracking for affiliate links
+let pendingRedirectUrl = null;
+
 function initClickTracking() {
     const ctaButtons = document.querySelectorAll('a[href*="clickbank"]');
-    
+
     ctaButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Track the click event
-            const buttonText = this.textContent.trim();
-            //console.log('CTA clicked:', buttonText);
-            
-            // Add visual feedback
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-            
-            // You could add analytics tracking here
-            // gtag('event', 'click', { 'event_category': 'CTA', 'event_label': buttonText });
-        });
-        
-        // Add loading state on click
-        button.addEventListener('click', function() {
-            const originalText = this.innerHTML;
-            //this.innerHTML = '<span class="loading"></span> Redirecting...';
-            this.innerHTML = 'Redirecting...';
-            
-            setTimeout(() => {
-                this.innerHTML = originalText;
-            }, 2000);
+            e.preventDefault(); // Prevent immediate redirect
+            pendingRedirectUrl = this.href;
+            showRedirectModal();
         });
     });
+}
+
+// Modal for redirect confirmation
+function showRedirectModal() {
+    const modal = document.getElementById("redirectModal");
+    const content = modal.querySelector(".modal-content");
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+
+    // ESC key to close
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            cancelRedirect();
+        }
+    });
+
+    // Click outside modal-content to close
+    modal.addEventListener("click", function (e) {
+        if (!content.contains(e.target)) {
+            cancelRedirect();
+        }
+    });
+}
+
+// Confirm or cancel redirect
+function confirmRedirect() {
+    closeRedirectModal();
+    if (pendingRedirectUrl) {
+        window.location.href = pendingRedirectUrl;
+    }
+}
+
+// Close modal and reset pending URL
+function cancelRedirect() {
+    closeRedirectModal();
+    pendingRedirectUrl = null;
+}
+
+// Close redirect modal
+function closeRedirectModal() {
+    const modal = document.getElementById("redirectModal");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
 }
 
 // Typing effect for hero text

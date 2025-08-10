@@ -1,4 +1,4 @@
-// Main JavaScript for PrimeBiome Landing Page
+import { initFlapText } from './flaptext.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFAQAccordion();
     initClickTracking();
     initLazyLoading();
+    initFlapText();
     //initTypingEffect();
 });
 

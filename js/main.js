@@ -1,4 +1,4 @@
-import { initFlapText } from './flaptext.js';
+import { initFlapText } from './flapText.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality

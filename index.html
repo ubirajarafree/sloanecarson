@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SloaneCarson Studio</title>
+    <meta name="description" content="We offer responsive web development, Flutter apps, UI/UX design, graphic design, and automation solutions.">
+    <meta name="keywords" content="Web Development, Flutter Apps, UI/UX, Graphic Design, Automation">
+    <link rel="canonical" href="https://sloanecarson.com" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Vue 2 via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Optional: Tailwind config for custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violetPastel: '#d8b4fe',
+                        violetDark: '#7c3aed',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    
+        .brand-font {
+            font-family: 'P22Mackinac', serif;
+        }
+    
+    
+        @keyframes shine {
+            0% {
+                background-position: 200% 0;
+            }
+    
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes bounce-to-right {
+            0%, 100% {
+                transform: translateX(-25%);
+                animation-timing-function: cubic-bezier(0.8,0,1,1);
+            }
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0,0,0.2,1);
+            }
+        }
+        .animate-bounce-to-right {
+            animation: bounce-to-right 1s infinite;
+        }
+    
+        .hover-gradient-shine {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            transition: transform 0.2s ease-out;
+        }
+    
+        .hover-gradient-shine::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                #fef9c3,
+                #fbcfe8,
+                #c4b5fd,
+                #fbcfe8,
+                #fef9c3 
+            );
+            background-size: 200% 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        .hover-gradient-shine:hover::before {
+            opacity: 1;
+            animation: shine 3s linear infinite;
+        }
+
+        .hover-gradient-shine > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .custom-gradient {
+            background: linear-gradient(
+                90deg,
+                #fef9c3 0%,
+                #fbcfe8 33%,
+                #c4b5fd 66%,
+                #a78bfa 100%
+            );
+        }
+
+        .hover-scale:hover .icon-wrapper {
+            background-color: #5eead4; /* teal 300*/
+        }
+
+        .hover-scale:hover .icon-wrapper i {
+            color: #7c3aed; /* violet 600 */
+        }
+
+        .hover-scale:hover h4 {
+            color: #6366f1; /* purple 500 */
+        }
+
+        .hover-gradient-shine:hover, .hover-scale:hover {
+            transform: scale(1.03);
+        }
+
+        .custom-gradient:hover {
+            background: none;
+        }
+
+        .nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+    
+        .backdrop-blur-custom {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+
+</head>
+
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- Vue App Root -->
+    <div id="app">
+
+        <!-- Topbar -->
+        <nav id="header"
+            class="fixed top-0 left-0 w-full z-50 border border-b-2 transition-all duration-300 backdrop-blur-custom">
+            <div id="branding"
+                class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center transition-all duration-300">
+                <!-- Logo -->
+                <div id="brand"
+                    class="brand-font text-[1.6rem] bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-violet-500 to-purple-600">
+                    SloaneCarson.com
+                </div>
+
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex space-x-6 font-medium transition-colors duration-300">
+                    <li>
+                        <a @click.prevent="scrollToSection('hero')" href="#hero" class="nav-link" 
+                            :class="navLinkClass">Home</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('services')" href="#services" class="nav-link"
+                            :class="navLinkClass">Services</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('showcase')" href="#showcase" class="nav-link"
+                            :class="navLinkClass">Showcase</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('contact')" href="#contact" class="nav-link"
+                            :class="navLinkClass">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- Mobile Menu Button -->
+                <button @click="toggleMenu" class="nav-link md:hidden focus:outline-none" :class="navLinkClass">
+                    <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform scale-150" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path v-if="!menuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                        <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div v-if="menuOpen" class="md:hidden px-4 pb-4 mobile-menu">
+                <ul class="space-y-2 font-medium">
+                    <li>
+                        <a @click.prevent="scrollToSection('hero')" href="#hero" class="block nav-link" 
+                            :class="navLinkClass">Home</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('services')" href="#services" class="block nav-link" 
+                            :class="navLinkClass">Services</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('showcase')" href="#showcase" class="block nav-link" 
+                            :class="navLinkClass">Showcase</a>
+                    </li>
+                    <li>
+                        <a @click.prevent="scrollToSection('contact')" href="#contact" class="block nav-link" 
+                            :class="navLinkClass">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="hero"
+            class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-white overflow-hidden">
+            <!-- Background Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-pink-50 via-violet-50 to-purple-50"></div>
+
+            <!-- Animated Gradient Blobs -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div
+                    class="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-pink-300/30 to-violet-300/30 rounded-full blur-3xl animate-pulse">
+                </div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full blur-3xl animate-pulse"
+                    style="animation-delay: 1s;"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col items-center">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4">
+                    <span class="text-gray-900">Creative Studio</span>
+                    <br class="block lg:hidden">
+                    <span
+                        class="bg-gradient-to-r from-pink-400 via-teal-400 to-purple-500 bg-clip-text text-transparent">
+                        for the Future
+                    </span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-6">
+                    We craft immersive digital experiences through design, 
+                    <br class="block lg:hidden">
+                    code, and intelligent automation.
+                </p>
+                <button @click="scrollToSection('services')"
+                    class="flex items-center gap-2 hover-gradient-shine custom-gradient text-gray-600 px-6 py-3 rounded-full transition duration-300">
+                    Explore Our Services
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-40 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                    <span class="text-gray-800">Our</span>
+                    <span class="bg-gradient-to-r from-pink-400 via-teal-400 to-purple-500 bg-clip-text text-transparent">Custom Services</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <!-- Card Template -->
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-code text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">Web Development</h4>
+                        <p class="text-gray-600 mb-4">
+                            We build responsive websites using modern stacks like HTML, CSS, and JavaScript. 
+                            Our focus is on performance, accessibility, and clean design.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-mobile-alt text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">Flutter Apps</h4>
+                        <p class="text-gray-600 mb-4">
+                            We create cross-platform mobile apps with Flutter, delivering native-like experiences, 
+                            smooth animations, and scalable architecture.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-paint-brush text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">UI/UX & Animation</h4>
+                        <p class="text-gray-600 mb-4">
+                            From wireframes to motion design, we craft intuitive interfaces powered by 
+                            GSAP and native CSS transitions for seamless user flow.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-pen-nib text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">Graphic Design</h4>
+                        <p class="text-gray-600 mb-4">
+                            We design bold visual identities—from logos to full brand systems—blending storytelling 
+                            with aesthetic precision for digital impact.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-robot text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">AI Tools</h4>
+                        <p class="text-gray-600 mb-4">
+                            We integrate AI-driven solutions like Base44, Lovable, and Bolt to optimize systems, 
+                            automate tasks, and enhance productivity.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div
+                        class="hover-scale flex flex-col bg-[#e7e5e4] p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-100 h-full">
+                        <div class="bg-pink-100 icon-wrapper transition-colors duration-1000 flex items-center justify-center w-14 h-14 mb-4 rounded-lg">
+                            <i class="fas transition-colors duration-1000 fa-bolt text-violet-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">Automation</h4>
+                        <p class="text-gray-600 mb-4">
+                            We build smart workflows using n8n, WhatsApp agents, and private RAG systems 
+                            to streamline operations and reduce manual effort.
+                        </p>
+                        <button @click="scrollToSection('contact')" 
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>Get In Touch</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Showcase Section -->
+        <section id="showcase" class="py-40 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                    <span class="text-gray-800">Project</span>
+                    <span class="bg-gradient-to-r from-pink-400 via-teal-400 to-purple-500 bg-clip-text text-transparent">Showcase</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 bg-[#e7e5e4] p-12 rounded-2xl shadow-md">
+                    <div class="w-full flex items-center justify-center overflow-hidden relative" style="padding-bottom: 56.25%;">
+                        <video class="absolute top-0 left-0 w-full h-full object-cover" loop autoplay muted>
+                            <source src="assets/media/primebiomeShowcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-xl font-semibold mb-2 text-violet-500">
+                            Transform Your Skin 
+                            <br class="block">
+                            & Gut Health with PrimeBiome
+                        </h4>
+                        <p class="text-gray-600 mb-4">
+                            Finally, a probiotic that cares for your skin and gut -- in one delicious gummy.
+                            Thousands are already feeling the glow. Ready to join them?
+                        </p>
+                        <button @click="window.open('https://sloanecarson.com/primebiome', '_blank')"
+                            class="flex gap-2 items-center mt-auto text-left font-medium transition-colors duration-300 text-violet-500 hover:text-sky-500">
+                            <span>View Online</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="relative py-40 lg:py-32 bg-gradient-to-br from-pink-50 to-violet-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                    <!-- Animated Gradient Blobs -->
+                    <div class="absolute inset-0 overflow-hidden">
+                        <div
+                            class="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-pink-300/30 to-violet-300/30 rounded-full blur-3xl animate-pulse">
+                        </div>
+                        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full blur-3xl animate-pulse"
+                            style="animation-delay: 1s;"></div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl leading-tight font-bold text-gray-900 mb-6">
+                                Let's Create Something
+                                <br class="block">
+                                <span
+                                    class="bg-gradient-to-r from-pink-400 via-teal-500 to-purple-500 bg-clip-text text-transparent">
+                                    Amazing Together
+                                </span>
+                            </h2>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Ready to bring your vision to life? Get in touch and let's discuss how we can help
+                                elevate your digital presence.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- Email -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-pink-200 rounded-xl flex items-center justify-center">
+                                    <i class="fa-brands fa-x-twitter text-violetDark text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Social</p>
+                                    <p class="text-gray-600">x.com/slocarson</p>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-violet-200 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-phone-alt text-violetDark text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Phone</p>
+                                    <p class="text-gray-600">+55 (62) 99425-3473</p>
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-violetDark text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Location</p>
+                                    <p class="text-gray-600">Brazil, GYN</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button href="#https://web.whatsapp.com/send?phone=5562994253473&text=Hello%20SloaneCarson!"
+                            class="flex items-center gap-2 hover-gradient-shine custom-gradient text-gray-600 px-6 py-3 rounded-full transition duration-300">
+                            Get in Touch
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 animate-bounce-to-right" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Avatar / Branding -->
+                    <div class="flex justify-center lg:justify-end">
+                        <div class="relative">
+                            <div id="video-avatar"
+                                class="relative w-80 h-80 bg-gradient-to-br from-pink-400 via-teal-500 to-purple-500 rounded-full p-1">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+                                    <div
+                                        class="w-72 h-72 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                                        <video class="w-full h-full object-cover rounded-full" loop autoplay muted>
+                                            <source src="assets/media/sloane2.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <span
+                                        class="absolute -z-10 text-6xl font-bold bg-gradient-to-r from-pink-400 via-violet-500 to-purple-600 bg-clip-text text-transparent">
+                                        SC
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Floating Blobs -->
+                            <div
+                                class="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-pink-300 to-violet-300 rounded-full opacity-60 animate-pulse">
+                            </div>
+                            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-purple-300 to-pink-300 rounded-full opacity-60 animate-pulse"
+                                style="animation-delay: 1s;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 py-6 text-center text-gray-600 text-sm">
+            <p>
+                &copy; 2025 
+                <span class="font-semibold text-violetDark">SloaneCarson.com </span>
+                . All rights reserved.
+            </p>
+            <p class="mt-2">
+                Crafted with 💜 using HTML, Tailwind, Vue2, and GSAP.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Optional: GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Vue Instance -->
+    <script src="assets/main.js" type="module"></script>
+
+</body>
+
+</html>

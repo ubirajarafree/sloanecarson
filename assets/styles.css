@@ -1,0 +1,12 @@
+/* SloaneCarson Studio Styles */
+@font-face {
+  font-family: 'P22Mackinac';
+  src: url('./fonts/P22Mackinac-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
